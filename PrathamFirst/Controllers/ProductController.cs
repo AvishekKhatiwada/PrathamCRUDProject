@@ -18,7 +18,6 @@ namespace PrathamFirst.Controllers
         //private readonly ILogger<HomeController> _logger;
         // GET: HomeController1
 
-
         public ActionResult Index()
         {
             List<Product> products = Context.Products.ToList();
@@ -71,6 +70,10 @@ namespace PrathamFirst.Controllers
 
         // GET: HomeController1/Create
         public ActionResult Create()
+        {
+            return View();
+        }
+        public ActionResult NewTemplete()
         {
             return View();
         }
