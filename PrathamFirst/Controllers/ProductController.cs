@@ -22,6 +22,7 @@ namespace PrathamFirst.Controllers
         public ActionResult Index()
         {
             List<Product> products = Context.Products.ToList();
+            return View(products);
             //var data = Context.Products.ToList();
             //Product obj = new Product();
             //foreach (var row in data)
@@ -40,7 +41,7 @@ namespace PrathamFirst.Controllers
             //    Color = Context.Products.First().Color,
             //    Price = Context.Products.First().Price
             //};
-            return View(products);
+
         }
         public ActionResult AddNew()
         {
@@ -56,13 +57,13 @@ namespace PrathamFirst.Controllers
         }
         public ActionResult Update(string id) 
         {
-            Product product = Context.Products.Where(p => p.Id == id).FirstOrDefault();
-            return View();
+            Product product = Context.Products.Find(id);
+            return View(product); 
         }
         [HttpPost]
         public ActionResult Update(Product prod)
         {
-            Context.Attach(prod);
+            
             Context.Entry(prod).State = EntityState.Modified;
             Context.SaveChanges();
             return RedirectToAction("Index");
@@ -113,12 +114,11 @@ namespace PrathamFirst.Controllers
         // GET: HomeController1/Delete/5
         public ActionResult Delete(string id)
         {
-            Product prod = Context.Products.Where(p => p.Id == id).FirstOrDefault();
-            Context.Attach(prod);
+            Product prod = Context.Products.Find(id);
             Context.Entry(prod).State = EntityState.Deleted;
             Context.SaveChanges();
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         // POST: HomeController1/Delete/5

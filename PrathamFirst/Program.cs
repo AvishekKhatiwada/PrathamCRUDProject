@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PrathamFirst.Data;
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<DbContext,ApplicationDbContext>();
 
