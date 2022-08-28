@@ -1,0 +1,78 @@
+﻿@*@model PrathamFirst.Models.Product*@
+@model IEnumerable<PrathamFirst.Models.Product>
+
+<h1 class="text-center text-primary">Product Details</h1>
+
+<a asp-area="" asp-controller="Product" asp-action="AddNew" class="btn btn-primary" >Add New</a>
+<table class="table table-stripped mt-2">
+    <thead class="bg-dark">
+        <tr class="text-white">
+            <th>S.N</th>
+            <th>Name</th>
+            <th>Stock</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+                @foreach (var item in Model)
+            {
+                <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Stock)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Color)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Size)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                        <td class="content-center">
+                        @*<form method="get" asp-controller="Home" asp-action="Delete">
+                           <input type="hidden" name="id" value="@item.Id">
+                        <button type="submit" class="btn btn-danger">Delete</button></form>*@
+                        <a asp-area="" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-success">Update</a>
+                        <a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+
+                            
+                        </td>
+                </tr>
+
+            }
+            }
+
+            @*@foreach (var item in products)
+            //{
+            //    <tr>
+            //        <td>1</td>
+            //        <td>@item.Name</td>
+            //        <td>@item.Stock</td>
+            //        <td>@item.Color</td>
+            //        <td>@item.Size</td>
+            //        <td>@item.Price</td>
+            //        <td class="content-center">
+            //            <a asp-area="" asp-controller="Product" asp-action="Update" class="btn btn-success">Update</a>
+            //            <input type="button" value="Delete" class="btn btn-danger" />
+
+            //        </td>
+            //    </tr>
+            //}
+                
+                //foreach (var item in Model)
+                //{
+                //    <tr>
+                //        <td>@item.Id</td>
+                //        <td>@item.Name</td>
+                //        <td>@item.Stock</td>
+                //        <td>@item.Color</td>
+                //        <td>@item.Size</td>
+                //        <td>@item.Price</td>
+                //        <td class="content-center">
+                //            <a asp-area="" asp-controller="Product" asp-action="Update" class="btn btn-success">Update</a>
+                //            <input type="button" value="Delete" class="btn btn-danger" />
+                //        </td>
+                //    </tr>
+                //}
+        //}*@
+        </tbody>
+    </table>

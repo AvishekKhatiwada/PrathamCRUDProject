@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Student Form";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" asp-controller="Home" asp-action="StudentDetails">
+    <div class="form-group">
+        <label for="id">Student id</label>
+        <input type="text" class="form-control w-25" name="id" id="id">
+    </div>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control w-25" name="name" id="name">
+    </div>
+    <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" class="form-control w-25" name="address" id="address">
+    </div>
+    @*<div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+        <label class="form-check-label" for="flexRadioDisabled">
+            Disabled radio
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled" checked disabled>
+        <label class="form-check-label" for="flexRadioCheckedDisabled">
+            Disabled checked radio
+        </label>
+    </div>*@
+    <button type="submit" class="btn btn-primary mt-lg-3">Submit</button>
+</form>
+
+

@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Update Product Details";
+}
+<h1>@ViewData["Title"]</h1>
+<form method="post" asp-controller="Product" asp-action="Update">
+    <div class="form-group">
+        <label for="namide">Product Id</label>
+        <input type="text" class="form-control w-25" name="id" id="id">
+    </div>
+    <div class="form-group">
+        <label for="name">Product Name</label>
+        <input type="text" class="form-control w-25" name="name" id="name">
+    </div>
+    <div class="form-group">
+        <label for="stock">Stock</label>
+        <input type="text" class="form-control w-25" name="stock" id="stock">
+    </div>
+    <div class="form-group">
+        <label for="color">Product Color</label>
+        <input type="text" class="form-control w-25" name="color" id="color">
+    </div>
+    <div class="form-group">
+        <label for="size">Product Size</label>
+        <input type="text" class="form-control w-25" name="size" id="size">
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="text" class="form-control w-25" name="price" id="price">
+    </div>
+    <button type="submit" class="btn btn-primary mt-lg-3">Update</button>
+</form>
