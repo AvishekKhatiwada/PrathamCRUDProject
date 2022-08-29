@@ -1,5 +1,15 @@
 ﻿@*@model PrathamFirst.Models.Product*@
 @model IEnumerable<PrathamFirst.Models.Product>
+<form action="#" method="get" class="sidebar-form">
+    <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search...">
+        <span class="input-group-btn">
+            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                <i class="fa fa-search"></i>
+            </button>
+        </span>
+    </div>
+</form>
 <h1 class="text-center text-primary">Product Details</h1>
 
 <a asp-area="" asp-controller="Product" asp-action="AddNew" class="btn btn-primary" >Add New</a>

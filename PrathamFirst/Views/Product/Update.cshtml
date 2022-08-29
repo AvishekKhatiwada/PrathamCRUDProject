@@ -6,7 +6,7 @@
 <form method="post" asp-controller="Product" asp-action="Update">
     <div class="form-group">
         <label for="namide">Product Id</label>
-        <input type="text" value="@Model.Id" class="form-control w-25" name="id" id="id">
+        <input type="text" value="@Model.Id" class="form-control w-25" name="id" id="id" readonly/>
     </div>
     <div class="form-group">
         <label for="name">Product Name</label>
