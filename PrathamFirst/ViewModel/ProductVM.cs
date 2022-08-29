@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using PrathamFirst.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace PrathamFirst.Models
+namespace PrathamFirst.ViewModel
 {
-    [Table("Product")]
-    public class Product
+    public class ProductVM
     {
         public long Id { get; set; }
         public string Name { get; set; }
@@ -11,7 +11,5 @@ namespace PrathamFirst.Models
         public string Color { get; set; }
         public string Size { get; set; }
         public decimal Price { get; set; }
-
     }
 }
- 

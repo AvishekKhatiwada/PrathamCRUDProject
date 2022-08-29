@@ -23,8 +23,11 @@ namespace PrathamFirst.Migrations
 
             modelBuilder.Entity("PrathamFirst.Models.Product", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -41,8 +44,9 @@ namespace PrathamFirst.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Stock")
-                        .HasColumnType("integer");
+                    b.Property<string>("Stock")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

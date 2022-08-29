@@ -1,10 +1,14 @@
 ﻿@*@model PrathamFirst.Models.Product*@
 @model IEnumerable<PrathamFirst.Models.Product>
-<form action="#" method="get" class="sidebar-form">
+@{
+    var a = 1;
+}
+
+<form action="#" method="get" class="sidebar-form ">
     <div class="input-group">
-        <input type="text" name="q" class="form-control" placeholder="Search...">
+        <input type="text" name="search" class="form-control w-25" placeholder="Search...">
         <span class="input-group-btn">
-            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+        <button type="submit"class="btn btn-flat">
                 <i class="fa fa-search"></i>
             </button>
         </span>
@@ -27,22 +31,23 @@
     </thead>
     <tbody>
         @{
-                @foreach (var item in Model)
+            @foreach (var item in Model)
             {
                 <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Stock)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Color)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Size)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                        <td class="content-center">
+                    <td>@a</td>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Stock)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Color)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Size)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                    <td class="content-center">
                         <a asp-area="" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-success">Update</a>
                         <a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
 
-                            
-                        </td>
+
+                    </td>
                 </tr>
+                a++;
 
             }
             }

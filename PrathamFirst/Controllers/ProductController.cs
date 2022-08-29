@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PrathamFirst.Data;
 using PrathamFirst.Models;
+using PrathamFirst.ViewModel;
 using System.Xml.Linq;
 
 namespace PrathamFirst.Controllers
@@ -10,9 +11,11 @@ namespace PrathamFirst.Controllers
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext Context;
-        public ProductController(ApplicationDbContext context)
+        private readonly IWebHostEnvironment webHostEnvironment;
+        public ProductController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             this.Context = context;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         //private readonly ILogger<HomeController> _logger;
@@ -47,14 +50,23 @@ namespace PrathamFirst.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddNew(Product prod)
+        public ActionResult AddNew(ProductVM prod)
         {
-            this.Context.Products.Add(prod);
-            this.Context.SaveChanges();
+
+            var data = new Product
+            {
+                Name=prod.Name,
+                Stock=prod.Stock,
+                Color=prod.Color,
+                Size=prod.Size,
+                Price=prod.Price,
+            };
+            Context.Products.Add(data);
+            Context.SaveChanges();
 
             return RedirectToAction("Index");
         }
-        public ActionResult Update(string id) 
+        public ActionResult Update(long id) 
         {
             Product product = Context.Products.Find(id);
             return View(product); 
