@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using PrathamFirst.Data;
 using PrathamFirst.Models;
 using System;
@@ -9,6 +10,7 @@ namespace PrathamFirst.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext Context { get; }
+        //private readonly INotyfService _notyf;
         public HomeController(ApplicationDbContext _context)
         {
             this.Context = _context;
@@ -21,11 +23,19 @@ namespace PrathamFirst.Controllers
         public IActionResult Login(User user)
         {
             var data = Context.Users.ToList();
+            
             foreach (var item in data)
             {
-                if (item.Email == user.Email && item.Password == user.Password)
+                if (item.Email == user.Email)
                 {
-                    return RedirectToAction("Index");
+                    bool verified = BCrypt.Net.BCrypt.Verify(user.Password, item.Password);
+                    if (verified == TRUE)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else {
+                        RedirectToAction("Privacy");
+                    }
                 }
                 else
                 {

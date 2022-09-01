@@ -223,7 +223,7 @@ desired effect
       <!-- /.tab-pane -->
     </div>
   </aside>*@
-  <!-- /.control-sidebar -->
+
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
@@ -231,6 +231,7 @@ desired effect
 <script src="~/js/jquery.min.js"></script>
 <script src="~/js/bootstrap.min.js"></script>
 <script src="~/js/adminlte.min.js"></script>
+  <!-- Toast Message -->
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await Component.InvokeAsync("Notyf")
     @RenderSection("Scripts", required: false)
