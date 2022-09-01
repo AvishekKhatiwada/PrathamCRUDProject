@@ -11,5 +11,7 @@ namespace PrathamFirst.ViewModel
         public string Color { get; set; }
         public string Size { get; set; }
         public decimal Price { get; set; }
+
+        public IFormFile Image { get; set; }
     }
 }

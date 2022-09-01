@@ -5,29 +5,40 @@
 @model PrathamFirst.Models.Product
 <h1>@ViewData["Title"]</h1>
 <form method="post" asp-controller="Product" asp-action="Update">
-    <div class="form-group">
-        <label for="namide">Product Id</label>
-        <input type="text" value="@Model.Id" class="form-control w-25" name="id" id="id" readonly/>
+    <div class="row">
+        <div class="form-group col-md-1">
+            <label for="namide">Id</label>
+            <input type="text" value="@Model.Id" class="form-control w-25" name="id" id="id" readonly />
+        </div>
+        <div class="form-group col-md-6">
+            <label for="name">Product Name</label>
+            <input type="text" value="@Model.Name" class="form-control w-25" name="name" id="name">
+        </div>
+@*        <div class="col-md-1">
+            <img style="height:55px;width=55px;paddiing: 0px;" src="/Images/@Model.Image"></img>
+        </div>*@
+        <div class="form-group col-md-5">
+            <label for="Image">Product Image</label>
+            <input type="file" class="form-control" value="@Model.Image" name="Image" id="Image">
+        </div>
     </div>
-    <div class="form-group">
-        <label for="name">Product Name</label>
-        <input type="text" value="@Model.Name" class="form-control w-25" name="name" id="name">
-    </div>
-    <div class="form-group">
-        <label for="stock">Stock</label>
-        <input type="text" value="@Model.Stock" class="form-control w-25" name="stock" id="stock">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="size">Product Size: </label>
+            <select class="form-select form-control w-25" asp-for="Size" id="size" aria-label="Product Size">
+                <option value="Large">Large</option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="stock">Stock</label>
+            <input type="text" value="@Model.Stock" class="form-control w-25" name="stock" id="stock">
+        </div>
     </div>
     <div class="form-group">
         <label for="color">Product Color</label>
         <input type="text" value="@Model.Color" class="form-control w-25" name="color" id="color">
-    </div>
-    <div class="form-group">
-        <label for="size">Product Size: </label>
-        <select class="form-select form-control w-25" asp-for="Size" id="size" aria-label="Product Size">
-            <option value="Large">Large</option>
-            <option value="Small">Small</option>
-            <option value="Medium">Medium</option>
-        </select>
     </div>
     <div class="form-group">
         <label for="price">Price</label>

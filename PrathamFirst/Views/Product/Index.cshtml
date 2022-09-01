@@ -1,5 +1,5 @@
 ﻿@*@model PrathamFirst.Models.Product*@
-@model IEnumerable<PrathamFirst.Models.Product>
+@*@model IEnumerable<PrathamFirst.Models.Product>*@
 @{
     var a = 1;
 }
@@ -21,6 +21,7 @@
     <thead class="bg-dark">
         <tr class="text-white">
             <th>S.N</th>
+            <th>Product Image</th>
             <th>Name</th>
             <th>Stock</th>
             <th>Color</th>
@@ -33,57 +34,21 @@
         @{
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@a</td>
-                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Stock)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Color)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Size)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                    <td class="content-center">
-                        <a asp-area="" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-success">Update</a>
-                        <a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-
-
-                    </td>
-                </tr>
-                a++;
-
+            <tr>
+                <td>@a</td>                    
+                <td>@item.Name</td>
+                <td>@item.Stock</td>
+                <td>@item.Color</td>
+                <td>@item.Size</td>
+                <td>@item.Price</td>
+                <td><img style="height:30px; width:30px;" src="/Images/@item.Image"/></td>
+                <td class="content-center">
+                    <a asp-area="" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-success">Update</a>
+                    <a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            a++;
             }
-            }
-
-            @*@foreach (var item in products)
-            //{
-            //    <tr>
-            //        <td>1</td>
-            //        <td>@item.Name</td>
-            //        <td>@item.Stock</td>
-            //        <td>@item.Color</td>
-            //        <td>@item.Size</td>
-            //        <td>@item.Price</td>
-            //        <td class="content-center">
-            //            <a asp-area="" asp-controller="Product" asp-action="Update" class="btn btn-success">Update</a>
-            //            <input type="button" value="Delete" class="btn btn-danger" />
-
-            //        </td>
-            //    </tr>
-            //}
-                
-                //foreach (var item in Model)
-                //{
-                //    <tr>
-                //        <td>@item.Id</td>
-                //        <td>@item.Name</td>
-                //        <td>@item.Stock</td>
-                //        <td>@item.Color</td>
-                //        <td>@item.Size</td>
-                //        <td>@item.Price</td>
-                //        <td class="content-center">
-                //            <a asp-area="" asp-controller="Product" asp-action="Update" class="btn btn-success">Update</a>
-                //            <input type="button" value="Delete" class="btn btn-danger" />
-                //        </td>
-                //    </tr>
-                //}
-        //}*@
+         }
         </tbody>
     </table>

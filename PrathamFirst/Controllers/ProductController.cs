@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PrathamFirst.Data;
@@ -12,12 +13,15 @@ namespace PrathamFirst.Controllers
     {
         private readonly ApplicationDbContext Context;
         private readonly IWebHostEnvironment webHostEnvironment;
-        public ProductController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        private readonly INotyfService _notyf;
+        public ProductController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, INotyfService notyf)
         {
             this.Context = context;
             this.webHostEnvironment = webHostEnvironment;
+            _notyf = notyf;
         }
-
+        
+        
         //private readonly ILogger<HomeController> _logger;
         // GET: HomeController1
 
@@ -52,6 +56,7 @@ namespace PrathamFirst.Controllers
         [HttpPost]
         public ActionResult AddNew(ProductVM prod)
         {
+            string FileUrl = Upload(prod);
 
             var data = new Product
             {
@@ -60,22 +65,45 @@ namespace PrathamFirst.Controllers
                 Color=prod.Color,
                 Size=prod.Size,
                 Price=prod.Price,
+                Image=FileUrl,
             };
             Context.Products.Add(data);
             Context.SaveChanges();
-
+            _notyf.Success("Product Added Successfully!");
             return RedirectToAction("Index");
         }
+
+        private string Upload(ProductVM prod)
+        {
+            string filename = "";
+            if (prod.Image != null) {
+                string uploadDir = Path.Combine(webHostEnvironment.WebRootPath, "Images");
+                filename = Guid.NewGuid().ToString() + "-" + prod.Image.FileName;
+                string filePath = Path.Combine(uploadDir, filename);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    prod.Image.CopyTo(fileStream);
+                }
+            }
+            return filename;
+        }
+
         public ActionResult Update(long id) 
         {
-            Product product = Context.Products.Find(id);
+            var product = Context.Products.Find(id);
             return View(product); 
         }
         [HttpPost]
-        public ActionResult Update(Product prod)
+        public ActionResult Update(ProductVM prod)
         {
-            
-            Context.Entry(prod).State = EntityState.Modified;
+            var product = Context.Products.Find(prod.Id);
+
+                product.Name = prod.Name;
+                product.Stock = prod.Stock;
+                product.Color = prod.Color;
+                product.Size = prod.Size;
+                product.Price = prod.Price;
+
             Context.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -127,7 +155,7 @@ namespace PrathamFirst.Controllers
         }
 
         // GET: HomeController1/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(long id)
         {
             Product prod = Context.Products.Find(id);
             Context.Entry(prod).State = EntityState.Deleted;

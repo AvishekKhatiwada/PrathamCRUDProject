@@ -1,0 +1,232 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Product Management</title>
+
+        <style>
+                    .modal {
+           position: absolute;
+           top: 10px;
+           right: 100px;
+           bottom: 0;
+           left: 0;
+           z-index: 10040;
+           overflow: auto;
+           overflow-y: auto;
+        }
+        </style>
+
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="~/assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="~/css/styles.css" rel="stylesheet" />
+</head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Product Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link">Contact</a></li>
+                    <li class="nav-item btn btn-primary" style="background-color:#0000e6;border:0px;" data-bs-toggle="modal" data-bs-target="#loginmodal"><button style="padding:0px;width:50px;background-color:#0000e6;border:0px;" type="button" class="btn btn-primary btn-sm">Login</button></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <div class="masthead-subheading">Welcome To My Project!</div>
+                <div style="font-size:20px;" class="masthead-heading">Manage Your Products Easily!</div>
+            <a class="btn btn-primary btn-lg text-uppercase"  data-bs-toggle="modal" data-bs-target="#registermodal">Register</a>
+        </div>
+        <!--Login Modal -->
+        <div  class="modal fade text-dark" id="loginmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div  class="modal-dialog py-2  modal-dialog-centered">
+                <div style="background-color: #f5f5f0;width: 400px;" class="modal-content">
+                    <div  class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form enctype="multipart/form-data" asp-controller="Home" asp-action="Login">
+                            <div class="form-group px-4 py-3">
+                                <label for="email" class="py-1">Email:</label>
+                               <input type="text" class="form-control border-2" name="email" id="email">
+                            </div>
+                            <div class="form-group px-4 py-3">
+                                <label for="password" class="py-1">Password:</label>
+                                <input type="password" class="form-control border-2" name="password" id="password">
+                            </div>
+                            <input  class="btn btn-warning mt-2" type="submit" value="Login"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Register Modal -->
+        <div class="modal fade text-dark" id="registermodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div style="background-color: #f5f5f0;" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registermodalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-start">
+                        <form enctype="multipart/form-data" asp-controller="User" asp-action="Register">
+                            <div class="form-group px-4">
+                                <label for="name" class="py-1">Full name:</label>
+                                <input type="text" class="form-control border-2" name="name" id="name">
+                            </div>
+                            <div class="form-group px-4">
+                                <label for="email" class="py-1">Email:</label>
+                                <input type="text" class="form-control border-2" name="email" id="email">
+                            </div>
+                            <div class="form-group px-4">
+                                <label for="address" class="py-1">Address:</label>
+                                <input type="text" class="form-control border-2" name="address" id="address">
+                            </div>
+                            <div class="form-group px-4">
+                                <label for="inlineRadioOptions" class="py-1">Gender:</label>
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="gender" id="inlineCheckBox1" value="male">
+                                  <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="gender" id="inlineCheckBox2" value="female">
+                                  <label class="form-check-label" for="female">Female</label>
+                                </div>
+                            </div>
+                            <div class="form-group px-4">
+                                <label for="password" class="py-1">Password:</label>
+                                <input type="password" class="form-control border-2" name="password" id="password">
+                            </div>
+                            <input class="btn btn-success mt-1"style="width:90px;margin-left:25px;" type="submit" value="Register" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+        <!-- Team-->
+        <section class="page-section bg-light" id="team">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="~/assets/img/team/me.jpg" alt="..." />
+                            <h4>Avishek Khatiwada</h4>
+                            <p class="text-muted">System Owener</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">A Student from Mechi Multiple Campus.Currently Reading in 7th semester of BCA faculty.</p></div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact-->
+        <section class="page-section" id="contact">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Contact Us</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                    <div class="row align-items-stretch mb-5">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- Name input-->
+                                <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            </div>
+                            <div class="form-group">
+                                <!-- Email address input-->
+                                <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
+                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                            </div>
+                            <div class="form-group mb-md-0">
+                                <!-- Phone number input-->
+                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-textarea mb-md-0">
+                                <!-- Message input-->
+                                <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
+                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-none" id="submitSuccessMessage">
+                        <div class="text-center text-white mb-3">
+                            <div class="fw-bolder">Form submission successful!</div>
+                            To activate this form, sign up at
+                            <br />
+                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                        </div>
+                    </div>
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                    <!-- Submit Button-->
+                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button></div>
+                </form>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2022</div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Core theme JS-->
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/scripts.js"></script>
+    </body>
+</html>

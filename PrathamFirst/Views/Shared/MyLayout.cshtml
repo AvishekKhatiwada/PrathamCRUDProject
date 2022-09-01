@@ -127,11 +127,11 @@ desired effect
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div style="padding-top:0px;" class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+@*    <section class="content-header">
      
-    </section>
+    </section>*@
 
     <!-- Main content -->
     <section class="content container-fluid">
@@ -231,6 +231,9 @@ desired effect
 <script src="~/js/jquery.min.js"></script>
 <script src="~/js/bootstrap.min.js"></script>
 <script src="~/js/adminlte.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await Component.InvokeAsync("Notyf")
+    @RenderSection("Scripts", required: false)
 
 </body>
 </html>

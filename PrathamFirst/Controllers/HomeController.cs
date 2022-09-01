@@ -13,19 +13,28 @@ namespace PrathamFirst.Controllers
         {
             this.Context = _context;
         }
-
-        private readonly ILogger<HomeController> _logger;
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-        
         public IActionResult Index()
         {
             return View();  
         }
-        
+        [HttpPost]
+        public IActionResult Login(User user)
+        {
+            var data = Context.Users.ToList();
+            foreach (var item in data)
+            {
+                if (item.Email == user.Email && item.Password == user.Password)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Privacy");
+                }
+            }
+            return RedirectToAction("Privacy");
+        }
+
         public IActionResult Privacy()
         {
             
