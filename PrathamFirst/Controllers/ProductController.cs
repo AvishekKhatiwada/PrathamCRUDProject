@@ -29,25 +29,7 @@ namespace PrathamFirst.Controllers
         {
             List<Product> products = Context.Products.ToList();
             return View(products);
-            //var data = Context.Products.ToList();
-            //Product obj = new Product();
-            //foreach (var row in data)
-            //{                
-            //    obj.Name = row.Name;
-            //    obj.Stock = row.Stock;
-            //    obj.Size = row.Size;
-            //    obj.Color = row.Color;
-            //    obj.Price = row.Price;
-            //}
-            //var viewModel = new Product()
-            //{
-            //    Name = Context.Products.First().Name,
-            //    Stock = Context.Products.First().Stock,
-            //    Size = Context.Products.First().Size,
-            //    Color = Context.Products.First().Color,
-            //    Price = Context.Products.First().Price
-            //};
-
+          
         }
         public ActionResult AddNew()
         {
@@ -56,21 +38,31 @@ namespace PrathamFirst.Controllers
         [HttpPost]
         public ActionResult AddNew(ProductVM prod)
         {
-            string FileUrl = Upload(prod);
-
-            var data = new Product
+            if (ModelState.IsValid)
             {
-                Name=prod.Name,
-                Stock=prod.Stock,
-                Color=prod.Color,
-                Size=prod.Size,
-                Price=prod.Price,
-                Image=FileUrl,
-            };
-            Context.Products.Add(data);
-            Context.SaveChanges();
-            _notyf.Success("Product Added Successfully!");
-            return RedirectToAction("Index");
+                
+                string FileUrl = Upload(prod);
+
+                var data = new Product
+                {
+                    Name = prod.Name,
+                    Stock = prod.Stock,
+                    Color = prod.Color,
+                    Size = prod.Size,
+                    Price = prod.Price,
+                    Image = FileUrl,
+                };
+                Context.Products.Add(data);
+                Context.SaveChanges();
+                _notyf.Success("Product Added Successfully!");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["errorMessage"] = "";
+
+            }
+            return View("AddNew");
         }
 
         private string Upload(ProductVM prod)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PrathamFirst.Data;
 using PrathamFirst.Models;
@@ -10,10 +11,11 @@ namespace PrathamFirst.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext Context { get; }
-        //private readonly INotyfService _notyf;
-        public HomeController(ApplicationDbContext _context)
+        private readonly INotyfService _notyf;
+        public HomeController(ApplicationDbContext _context, INotyfService notyf)
         {
             this.Context = _context;
+            _notyf = notyf;
         }
         public IActionResult Index()
         {
@@ -29,20 +31,24 @@ namespace PrathamFirst.Controllers
                 if (item.Email == user.Email)
                 {
                     bool verified = BCrypt.Net.BCrypt.Verify(user.Password, item.Password);
-                    if (verified == TRUE)
+                    if (verified == true)
                     {
+                        _notyf.Success("Log In Successful!");
                         return RedirectToAction("Index");
                     }
                     else {
-                        RedirectToAction("Privacy");
+                        RedirectToAction("Wrong");
                     }
                 }
                 else
                 {
-                    return RedirectToAction("Privacy");
+                    return RedirectToAction("Wrong");
                 }
             }
-            return RedirectToAction("Privacy");
+            return RedirectToAction("Wrong");
+        }
+        public IActionResult Wrong() {
+            return View();
         }
 
         public IActionResult Privacy()

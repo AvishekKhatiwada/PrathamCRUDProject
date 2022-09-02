@@ -68,17 +68,20 @@
                         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" style="padding:0px;">
                         <form enctype="multipart/form-data" asp-controller="Home" asp-action="Login">
-                            <div class="form-group px-4 py-3">
+                            <div class="form-group px-4">
                                 <label for="email" class="py-1">Email:</label>
                                <input type="text" class="form-control border-2" name="email" id="email" required>
                             </div>
-                            <div class="form-group px-4 py-3">
+                            <div class="form-group px-4">
                                 <label for="password" class="py-1">Password:</label>
                                 <input type="password" class="form-control border-2" name="password" id="password" required>
                             </div>
-                            <input  class="btn btn-warning mt-2" type="submit" value="Login"/>
+                            <div class="Form-group p-3">
+                                <input class="btn btn-warning mt-2" type="submit" value="Login"/>
+                            </div>
+                            
                         </form>
                     </div>
                 </div>
