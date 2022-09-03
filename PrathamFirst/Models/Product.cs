@@ -7,6 +7,7 @@ namespace PrathamFirst.Models
     public class Product
     {
         public long Id { get; set; }
+        public String? Image { get; set; }
         [Required]
         public string? Name { get; set; }
         [Required]
@@ -18,7 +19,7 @@ namespace PrathamFirst.Models
         [Required]
         public decimal? Price { get; set; }
 
-        public String? Image { get; set; }
+       
 
 
     }

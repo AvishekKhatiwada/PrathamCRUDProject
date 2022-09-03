@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="~/css/ionicons.min.css">
   <link rel="stylesheet" href="~/css/AdminLTE.min.css">
   <link rel="stylesheet" href="~/css/skin-blue.min.css">
+  
  </head>
 <!--
 BODY TAG OPTIONS:
@@ -100,15 +101,15 @@ desired effect
     </div> *@
 
       <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
+     @* <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="q" id="Search" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
               <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
               </button>
             </span>
         </div>
-      </form>
+      </form>*@
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
@@ -231,6 +232,7 @@ desired effect
 <script src="~/js/jquery.min.js"></script>
 <script src="~/js/bootstrap.min.js"></script>
 <script src="~/js/adminlte.min.js"></script>
+
   <!-- Toast Message -->
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await Component.InvokeAsync("Notyf")

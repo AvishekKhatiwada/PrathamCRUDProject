@@ -1,7 +1,9 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PrathamFirst.Data;
+using PrathamFirst.Migrations;
 using PrathamFirst.Models;
 using System;
 using System.Diagnostics;
@@ -22,30 +24,23 @@ namespace PrathamFirst.Controllers
             return View();  
         }
         [HttpPost]
-        public IActionResult Login(User user)
+        public IActionResult Login(string email,string password)
         {
-            var data = Context.Users.ToList();
-            
-            foreach (var item in data)
+            var UserDetail = Context.Users.FirstOrDefault(u => u.Email == email);
+
+            if (UserDetail is null)
             {
-                if (item.Email == user.Email)
+                return Redirect("https://localhost:7206");
+            }
+            else {
+                if (BCrypt.Net.BCrypt.Verify(password, UserDetail.Password))
                 {
-                    bool verified = BCrypt.Net.BCrypt.Verify(user.Password, item.Password);
-                    if (verified == true)
-                    {
-                        _notyf.Success("Log In Successful!");
-                        return RedirectToAction("Index");
-                    }
-                    else {
-                        RedirectToAction("Wrong");
-                    }
+                    return RedirectToAction("Index");
                 }
-                else
-                {
-                    return RedirectToAction("Wrong");
+                else {
+                    return Redirect("https://localhost:7206");
                 }
             }
-            return RedirectToAction("Wrong");
         }
         public IActionResult Wrong() {
             return View();
@@ -53,7 +48,6 @@ namespace PrathamFirst.Controllers
 
         public IActionResult Privacy()
         {
-            
             return View();
         }
         [HttpPost]

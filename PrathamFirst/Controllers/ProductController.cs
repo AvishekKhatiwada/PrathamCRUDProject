@@ -40,7 +40,6 @@ namespace PrathamFirst.Controllers
         {
             if (ModelState.IsValid)
             {
-                
                 string FileUrl = Upload(prod);
 
                 var data = new Product
@@ -65,20 +64,7 @@ namespace PrathamFirst.Controllers
             return View("AddNew");
         }
 
-        private string Upload(ProductVM prod)
-        {
-            string filename = "";
-            if (prod.Image != null) {
-                string uploadDir = Path.Combine(webHostEnvironment.WebRootPath, "Images");
-                filename = Guid.NewGuid().ToString() + "-" + prod.Image.FileName;
-                string filePath = Path.Combine(uploadDir, filename);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    prod.Image.CopyTo(fileStream);
-                }
-            }
-            return filename;
-        }
+       
 
         public ActionResult Update(long id) 
         {
@@ -89,6 +75,7 @@ namespace PrathamFirst.Controllers
         public ActionResult Update(ProductVM prod)
         {
             var product = Context.Products.Find(prod.Id);
+  
 
                 product.Name = prod.Name;
                 product.Stock = prod.Stock;
@@ -97,9 +84,24 @@ namespace PrathamFirst.Controllers
                 product.Price = prod.Price;
 
             Context.SaveChanges();
+            _notyf.Warning("Product Updated Successfully!");
             return RedirectToAction("Index");
         }
-
+        private string Upload(ProductVM prod)
+        {
+            string filename = "";
+            if (prod.Image != null)
+            {
+                string uploadDir = Path.Combine(webHostEnvironment.WebRootPath, "Images");
+                filename = Guid.NewGuid().ToString() + "-" + prod.Image.FileName;
+                string filePath = Path.Combine(uploadDir, filename);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    prod.Image.CopyTo(fileStream);
+                }
+            }
+            return filename;
+        }
         // GET: HomeController1/Create
         public ActionResult Create()
         {
@@ -152,7 +154,7 @@ namespace PrathamFirst.Controllers
             Product prod = Context.Products.Find(id);
             Context.Entry(prod).State = EntityState.Deleted;
             Context.SaveChanges();
-
+            _notyf.Error("Product Deleted Successfully!");
             return RedirectToAction("Index");
         }
 
