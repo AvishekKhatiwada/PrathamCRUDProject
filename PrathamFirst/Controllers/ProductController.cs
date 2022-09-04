@@ -58,6 +58,7 @@ namespace PrathamFirst.Controllers
             }
             else
             {
+                _notyf.Error("Product Addition Failed!");
                 TempData["errorMessage"] = "";
 
             }

@@ -35,6 +35,7 @@ namespace PrathamFirst.Controllers
             else {
                 if (BCrypt.Net.BCrypt.Verify(password, UserDetail.Password))
                 {
+                    _notyf.Success("Login Successful");
                     return RedirectToAction("Index");
                 }
                 else {
@@ -42,10 +43,6 @@ namespace PrathamFirst.Controllers
                 }
             }
         }
-        public IActionResult Wrong() {
-            return View();
-        }
-
         public IActionResult Privacy()
         {
             return View();
