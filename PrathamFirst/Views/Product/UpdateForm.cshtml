@@ -4,7 +4,7 @@
 }
 @model PrathamFirst.Models.Product
 <h1>@ViewData["Title"]</h1>
-<form method="post" asp-controller="Product" asp-action="Update">
+<form method="post" enctype="multipart/form-data" asp-controller="Product" asp-action="Update">
     <div class="row">
         <div class="form-group col-md-1">
             <label for="namide">Id</label>

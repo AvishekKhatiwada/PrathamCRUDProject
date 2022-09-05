@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using PrathamFirst.Data;
 using PrathamFirst.Models;
 using PrathamFirst.ViewModel;
 using System.Xml.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace PrathamFirst.Controllers
 {
@@ -67,7 +69,7 @@ namespace PrathamFirst.Controllers
 
        
 
-        public ActionResult Update(long id) 
+        public ActionResult UpdateForm(long id) 
         {
             var product = Context.Products.Find(id);
             return View(product); 
@@ -75,8 +77,35 @@ namespace PrathamFirst.Controllers
         [HttpPost]
         public ActionResult Update(ProductVM prod)
         {
-            var product = Context.Products.Find(prod.Id);
-  
+            string stringFile = Upload(prod);
+
+            if (prod.Image != null)
+            {
+
+                var product = Context.Products.Find(prod.Id);
+
+                string delDir = Path.Combine(webHostEnvironment.WebRootPath, "Images", product.Image);
+                FileInfo f1 = new FileInfo(delDir);
+                if (f1.Exists)
+                {
+                    System.IO.File.Delete(delDir);
+                    f1.Delete();
+                }
+
+                product.Name = prod.Name;
+                product.Stock = prod.Stock;
+                product.Color = prod.Color;
+                product.Size = prod.Size;
+                product.Price = prod.Price;
+                product.Image = stringFile;
+
+                Context.SaveChanges();
+                _notyf.Warning("Product Updated Successfully!");
+                return RedirectToAction("Index");
+            }
+            else {
+
+                var product = Context.Products.Find(prod.Id);
 
                 product.Name = prod.Name;
                 product.Stock = prod.Stock;
@@ -84,10 +113,14 @@ namespace PrathamFirst.Controllers
                 product.Size = prod.Size;
                 product.Price = prod.Price;
 
-            Context.SaveChanges();
-            _notyf.Warning("Product Updated Successfully!");
-            return RedirectToAction("Index");
+                Context.SaveChanges();
+                _notyf.Warning("Product Updateed Successfully!");
+                return RedirectToAction("Index");
+
+            }
+           
         }
+       
         private string Upload(ProductVM prod)
         {
             string filename = "";
@@ -102,6 +135,15 @@ namespace PrathamFirst.Controllers
                 }
             }
             return filename;
+        }
+
+        public ActionResult Delete(long id)
+        {
+            Product prod = Context.Products.Find(id);
+            Context.Entry(prod).State = EntityState.Deleted;
+            Context.SaveChanges();
+            _notyf.Error("Product Deleted Successfully!");
+            return RedirectToAction("Index");
         }
         // GET: HomeController1/Create
         public ActionResult Create()
@@ -150,14 +192,7 @@ namespace PrathamFirst.Controllers
         }
 
         // GET: HomeController1/Delete/5
-        public ActionResult Delete(long id)
-        {
-            Product prod = Context.Products.Find(id);
-            Context.Entry(prod).State = EntityState.Deleted;
-            Context.SaveChanges();
-            _notyf.Error("Product Deleted Successfully!");
-            return RedirectToAction("Index");
-        }
+        
 
         // POST: HomeController1/Delete/5
         [HttpPost]
